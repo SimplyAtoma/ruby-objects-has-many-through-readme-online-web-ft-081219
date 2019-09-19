@@ -16,7 +16,11 @@ class Waiter
     Meal.new(self,customer,total, tip)
   end 
   
+  def meals
+    Meal.all.find_all{ |meal| meal.waiter == self}
+  end
+  
   def best_tipper 
-    Meal.all.find_all{ |meal| meal.waiter == self}.sort_by{|meal| meal.tip}.last.customer
+    self.meals.sort_by{|meal| meal.tip}.last.customer
   end
 end
